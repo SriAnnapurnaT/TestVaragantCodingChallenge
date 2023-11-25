@@ -1,1 +1,46 @@
-print("hello")
+def calculate_total_amount(unit_price, quantity, eligible_for_gst):
+    if eligible_for_gst:
+        gst_rate = 0.18
+        gst_amount = unit_price * quantity * gst_rate
+    else:
+        gst_amount = 0
+    total_before_discount = unit_price * quantity + gst_amount
+    discount_rate = 0.05 
+    if unit_price >= 500:
+        discount_amount = total_before_discount * discount_rate
+    else:
+        discount_amount = 0
+    total_amount = total_before_discount - discount_amount
+    return total_amount, gst_amount
+
+# Product 1
+unit_price = 1100
+quantity = 1
+eligible_for_gst = True
+total_amount, gst_amount_1 = calculate_total_amount(unit_price, quantity, eligible_for_gst)
+print(f'Total amount that paid for Leather Wallet is: Rs {total_amount:.2f}')
+
+# Product 2
+unit_price = 900
+quantity = 4
+eligible_for_gst = True
+total_amount, gst_amount_2 = calculate_total_amount(unit_price, quantity, eligible_for_gst)
+print(f'Total amount that paid for Umberlla is: Rs {total_amount:.2f}')
+
+# Product 3
+unit_price = 200
+quantity = 3
+eligible_for_gst = True
+total_amount, gst_amount_3 = calculate_total_amount(unit_price, quantity, eligible_for_gst)
+print(f'Total amount that paid for Cigratte is: Rs {total_amount:.2f}')
+
+# Product 4
+unit_price = 100
+quantity = 2
+eligible_for_gst = True
+total_amount, gst_amount_4 = calculate_total_amount(unit_price, quantity, eligible_for_gst)
+print(f'Total amount that paid for Honey is: Rs {total_amount:.2f}')
+
+max_gst_product = max([(1, gst_amount_1), (2, gst_amount_2), (3, gst_amount_3), (4, gst_amount_4)], key=lambda x: x[1])
+
+print(f'The product with the maximum GST amount is Product {max_gst_product[0]} with Rs {max_gst_product[1]:.2f} GST.')
